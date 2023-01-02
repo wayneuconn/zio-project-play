@@ -1,0 +1,23 @@
+name: PR Opened, Synced, Reopened
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+
+      - name: Build the Docker image
+        run: |
+          chmod +x ./gradlew
+          ./gradlew installShadowDist
+          docker build  . -f Dockerfile -t zio-project-backend:${{ github.head_ref }}-${GITHUB_SHA::7}

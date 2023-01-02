@@ -1,0 +1,12 @@
+version: "1.0"
+services:
+  backend:
+    image: "zio-project-backend:local"
+    container_name: zio-project
+    build: zio-project-main
+    ports:
+      - "9002:9002"
+    volumes:
+      - ~/.config/:/root/.config
+    env_file:
+      - example.env
