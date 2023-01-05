@@ -1,6 +1,7 @@
 package com.wayne.routes
 
 import com.wayne.routes.testEndpoints.HelloApp
+import com.wayne.routes.testEndpoints.UserRoutes
 import io.circe.syntax.EncoderOps
 import sttp.apispec.openapi.OpenAPI
 import sttp.apispec.openapi.circe.encoderOpenAPI
@@ -11,7 +12,7 @@ import sttp.tapir.ztapir.{RichZEndpoint, ZServerEndpoint, endpoint, stringBody}
 import zhttp.http.HttpApp
 import zio.ZIO
 
-object Endpoints extends HelloApp {
+object Endpoints extends HelloApp with UserRoutes {
   private[this] val allEndpoints = helloRoutes.map(_.endpoint)
   private[this] val docs: OpenAPI =
     OpenAPIDocsInterpreter().toOpenAPI(
@@ -29,6 +30,6 @@ object Endpoints extends HelloApp {
 
   private[this] val docsServer: HttpApp[Any, Throwable] =
     ZioHttpInterpreter().toHttp(docsServerEndpoint)
-  private[this] val coreAppServer = (helloServer ++ docsServer)
+  private[this] val coreAppServer = (helloServer ++ docsServer ++ userServer)
   val app = coreAppServer
 }

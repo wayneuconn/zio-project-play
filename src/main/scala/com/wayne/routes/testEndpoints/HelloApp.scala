@@ -1,6 +1,6 @@
 package com.wayne.routes.testEndpoints
 
-import sttp.tapir.{PublicEndpoint, endpoint, path, stringBody}
+import sttp.tapir.{endpoint, path, stringBody}
 import sttp.tapir.server.ziohttp.ZioHttpInterpreter
 import sttp.tapir.ztapir.{RichZEndpoint, ZServerEndpoint}
 import zio.ZIO

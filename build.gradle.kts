@@ -95,4 +95,7 @@ dependencies {
     // Google BIG Query Client Library
     implementation(platform("com.google.cloud:libraries-bom:25.4.0"))
     implementation("com.google.cloud:google-cloud-bigquery")
+
+    // MySql
+    implementation("mysql:mysql-connector-java:8.0.31")
 }
